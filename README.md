@@ -1,2 +1,2 @@
 # odoo-modules
-TEST45
+TEST
