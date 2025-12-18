@@ -1,4 +1,2 @@
 # odoo-modules
 
-
-TEST
