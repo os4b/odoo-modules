@@ -1,0 +1,166 @@
+:toc:
+:toc-title: Sommaire
+:toclevels: 3
+:numbered:
+:imagesdir: ./images
+
+= *Odoo Direct Print Pro*
+
+== *Description*
+
+=== *Présentation du module Odoo Direct Print Pro*
+
+Le module Odoo Direct Print Pro développé par VentorTech est une solution avancée d'impression directe pour les rapports et les étiquettes d'expédition dans Odoo.
+Conçu pour simplifier et accélérer le processus d'impression, ce module permet aux utilisateurs d'envoyer directement des documents à des imprimantes locales ou distantes sans passer par l'étape de téléchargement de fichiers PDF.
+
+Le module Odoo Direct Print Pro s’appuie sur le service d’impression PrintNode:
+
+=== *Présentation de PrintNode*
+
+PrintNode est un service d'impression en ligne (SAAS) qui permet d'imprimer à distance sur des imprimantes physiques à partir de n'importe quel appareil connecté à Internet.
+PrintNode offre une intégration transparente avec les applications et les sites web, permettant ainsi à tout utilisateur d'envoyer des tâches d'impression rapidement et efficacement.
+
+image:printnode_scheme.png[image,width=381,height=328]
+
+Le fonctionnement de PrintNode repose sur un client web qui communique avec les serveurs PrintNode pour traiter les demandes d'impression et les transmettre aux imprimantes désignées.
+Une fois l'impression terminée, les fichiers sont automatiquement supprimés des serveurs PrintNode pour des raisons de sécurité.
+
+== *Installation*
+
+=== *Abonnement PrintNode*
+
+Avant d'utiliser le module Odoo Direct Print Pro, il est nécessaire de souscrire à un abonnement sur le site de PrintNode.
+Différentes formules d'abonnement avec des volumes d'impression variés sont proposés pour s'adapter aux besoins des utilisateurs.
+
+image:printnode_subscription.png[image,width=642,height=328]
+
+=== *Installation du client printNode*
+
+Pour envoyer une tâche d'impression à votre imprimante, il suffit d'installer le client PrintNode sur un seul ordinateur disposant d'un accès à l'imprimante et à Internet.
+Il n'est pas nécessaire de déployer le client sur chaque ordinateur du réseau.
+En effet, avoir un seul ordinateur qui a accès à toutes les imprimantes peut être suffisant.
+
+À noter que le client PrintNode est compatible avec les systèmes d'exploitation suivants : Windows, macOS/OS X et Linux.
+
+*Procédure d'installation:*
+
+. *Téléchargement du Client :* Rendez-vous sur le site
+https://www.printnode.com/[printnode.com] pour télécharger le client PrintNode compatible avec votre système d'exploitation.
+. *Installation :* Une fois le client téléchargé, suivez les instructions d'installation spécifiques à votre système d'exploitation pour installer le client PrintNode sur votre ordinateur.
+. *Connexion au Compte :* Pour connecter le client PrintNode à votre compte, veuillez renseigner l'adresse e-mail et le mot de passe utilisés lors de votre inscription à l'abonnement PrintNode.
+
+Une fois ces étapes complétées, le client PrintNode détectera automatiquement toutes les imprimantes connectées à l’ordinateur.
+Normalement toutes les imprimantes sont compatibles avec PrintNode car celui-ci utilise les pilotes installés sur l’ordinateur pour communiquer avec l’imprimante.
+
+⚠️ Pour les systèmes basés sur Linux le service CUPS (_Common Unix Printing System_) doit-être activé.
+
+image:direct_print_client.png[]
+
+=== *Configuration du module Direct Print*
+
+==== *Configuration de la clé API*
+
+Lors de l'installation du module, il est nécessaire de fournir la clé API fournie lors de la souscription à l'abonnement PrintNode.
+Cette clé API permet au module de communiquer avec les serveurs PrintNode pour envoyer des tâches d'impression.
+
+La clé API peut-être renseignée depuis la page de configuration du module Direct Print Pro.
+
+image::api_key.png[]
+
+==== *Activation du module direct print*
+
+Allez dans les paramètres du module direct print.
+Cochez la case «Activer l'impression directe» puis sélectionnez une imprimante par défaut.
+
+image::activate_direct_print.png[]
+
+Il est également possible de configurer une imprimante par défaut différente pour chaque utilisateur.
+Pour ce faire, allez sur la fiche utilisateur, cliquez sur auto-print via direct print et sélectionner l'imprimante souhaitée.
+Si aucune imprimante n’est renseignée l’imprimante par défaut configurée dans les paramètres du module sera utilisée.
+
+image::user_settings.png[]
+
+==== *Importer les imprimantes*
+
+Pour importer dans Odoo les imprimantes détectées par le client PritnNode, il suffit de cliquer sur le bouton "Importer les imprimantes & balances".
+
+image::import_printers.png[]
+
+Toutes les imprimantes importées dans Odoo sont regroupées sur la page «Imprimantes» (onglet configuration). Chaque imprimante est activable avec le toggle switch "Actif".
+
+== *Fonctionnalités*
+
+=== *Bouton «Imprimer» sur les vues formulaire*
+
+Après avoir activé l'impression directe un bouton "Imprimer" apparaît désormais sur la vue formulaire, permettant d'imprimer directement sur l'imprimante configurée pour l'utilisateur (ou l'imprimante par défaut du module si aucune n'est renseignée).
+
+image::print_button_form.png[]
+
+Le téléchargement en PDF reste également disponible via le bouton "Télécharger".
+
+=== *Impression automatique et scénarios*
+
+==== *Règles sur les rapports*
+
+Pour chaque rapport, il est possible de paramétrer l’imprimante, le bac à papier utilisé ainsi que le format. Ainsi lorsque ce rapport sera généré, il sera imprimé directement sur l'imprimante sélectionnée et ne sera plus téléchargé en PDF.
+
+image::report_rules.png[]
+
+==== *Règles utilisateurs*
+
+Grâce aux règles utilisateurs, il est possible de définir des stratégies d'impression spécifiques pour répondre aux besoins et aux préférences individuels de chaque utilisateur.
+Ces règles sont configurables depuis la page Règles d'impression/Règles utilisateurs.
+
+image::user_rules.png[]
+
+==== *Scénarios d’impression*
+
+Par défaut le module Odoo Direct Print Pro contient un certain nombre de scénarios prédéfinis.
+Ceux-ci permettent de déployer rapidement une solution sans passer par une configuration complexe.
+
+Par exemple si l’utilisateur souhaite imprimer directement un devis lorsqu'une commande est confirmée, il peut activer le scénario _"Print document on Purchase Order (after confirmation)"_.
+
+image::scenarios.png[]
+
+==== *Boutons d'action*
+
+Il est possible d’aller plus loin dans la configuration et de définir ses propres scénarios depuis le menu "Boutons d'action".
+
+[arabic]
+. Dans le menu "Méthodes" (onglet Configuration) associez un nom de méthode avec une action python (le nom de la fonction peut être retrouvé en survolant le bouton en mode debug)
+. Sur la page "Boutons d'action" associer cette nouvelle méthode avec un rapport et une imprimante.
+
+Ainsi lorsque cette méthode sera appelée le rapport sera automatiquement imprimé sur cette imprimante.
+
+L’exemple ci-dessous montre comment imprimer un devis sur l’imprimante _Brother_ lorsque celui-ci est confirmé.
+
+image::action_button.png[]
+
+Si le champ imprimante est laissé vide alors le rapport sera imprimé sur l'imprimante configurée par défaut pour l'utilisateur.
+
+Il est aussi possible d'ajouter un domaine via l'éditeur de domaine:
+
+image::add_domain.png[]
+image::add_domain_1.png[]
+
+==== *Assistant d'impression*
+
+L'assistant d'impression dans le module Odoo Direct Print Pro est une fonctionnalité qui facilite la configuration et l'utilisation de l'impression directe depuis Odoo. Cette fonctionnalité permet aux utilisateurs de définir les paramètres d'impression, y compris l'imprimante par défaut et d'autres options d'impression, de manière simple et conviviale.
+
+L'assistant se présente sous la forme d'une pop-up accessible depuis le bouton action d'une vue formulaire. Il existe deux types d'assistants d'impression: l'assistant d'impression des pièces jointes et l'assistant d'impression des rapports.
+
+. *Assistant d'impression des pièces jointes* : Cet assistant permet de gérer l'impression des pièces jointes directement depuis Odoo. Les utilisateurs peuvent sélectionner les pièces jointes qu'ils souhaitent imprimer et configurer les paramètres d'impression associés, telles que l'imprimante à utiliser, les options d'impression, etc.
+
+. *Assistant d'impression des rapports*: Cet assistant est spécifiquement conçu pour gérer l'impression des rapports générés par Odoo. Il permet aux utilisateurs de sélectionner les rapports qu'ils souhaitent imprimer, de personnaliser les paramètres d'impression, tels que le format de papier, l'orientation, etc., et de choisir l'imprimante à utiliser.
+
+Vous pouvez ajouter un assistant depuis le menu _Configuration/Configurer l'assistant d'impression_. L'assistant sera accessible depuis le bouton action de la vue formulaire du modèle associé.
+
+== *Support*
+
+L'équipe de développement de VentorTech assure un support continu pour le module Odoo Direct Print PRO, en fournissant des mises à jour régulières pour garantir la compatibilité avec les nouvelles versions d'Odoo et pour introduire de nouvelles fonctionnalités basées sur les commentaires des utilisateurs.
+
+Adresse mail du support VentorTech: support@ventor.tech.
+
+== *Version*
+
+Le module Odoo Direct Print Pro est disponible pour des versions d’Odoo allant de la V10 à la V17.

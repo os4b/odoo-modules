@@ -1,0 +1,6 @@
+name: direct_print_pro_doc
+title: Documentation Direct Print Pro
+version: true
+start_page: ROOT:installation.adoc
+nav:
+- modules/ROOT/nav.adoc
